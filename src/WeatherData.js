@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import MyChart from './MyChart';
 import DataField from './DataField';
 
 const WeatherData = ({ data }) => {
-  const [color, setColor] = useState();
   const temp = [];
   const ground = [];
   const categories = [];
@@ -49,4 +49,9 @@ const WeatherData = ({ data }) => {
     </div>
   );
 };
+WeatherData.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+
 export default WeatherData;
