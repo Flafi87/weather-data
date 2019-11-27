@@ -1,0 +1,4 @@
+export const DOWNLOAD_DATA = 'DOWNLOAD_DATA';
+export const CHANGE_GRAPH = 'CHANGE_GRAPH';
+export const DATA_LOADING = 'DATA_LOADING';
+export const CHART_LOADING = 'CHART_LOADING';

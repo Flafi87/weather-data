@@ -1,6 +1,7 @@
 html {
   height: 100%;
   background-color: #253240;
+  cursor:default;
 }
 .App {
   text-align: center;
@@ -50,10 +51,28 @@ header {
   margin: 10px;
   padding: 5px;
   color: white;
+  background-color: #314052;
   border-radius: 15%;
   justify-content: center;
   text-align: center;
   font-size: calc(4px + 2vmin);
+}
+.data.active {
+  max-width: 150px;
+  margin: 10px;
+  padding: 5px;
+  color: white;
+  background-color: #314052;
+  border-radius: 15%;
+  justify-content: center;
+  text-align: center;
+  font-size: calc(4px + 2vmin);
+  cursor:pointer;
+  transition: 0.3s;
+}
+.data.active:hover{
+  color: #CCFFCC;
+  background-color: #148ECC
 }
 .row {
   justify-content: center;
@@ -62,6 +81,12 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.helper{
+  margin:5px;
+  font-size:0.6rem;
+  color:white
 }
 
 /**Spinner */

@@ -1,11 +1,14 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 import PropTypes from 'prop-types';
+import Spinner from './Spinner';
 /**
  * @param  {string} temp
  * @param  {string} categories
  */
-const MyChart = ({ temp, categories }) => {
+const MyChart = ({
+  temp, categories, isLoading, unit,
+}) => {
   // eslint-disable-next-line no-undef
   const width = window.innerWidth;
   // eslint-disable-next-line no-undef
@@ -40,7 +43,7 @@ const MyChart = ({ temp, categories }) => {
           cssClass: 'apexcharts-yaxis-label',
         },
         formatter: function (value) {
-          return `${value} C°`;
+          return `${value} ${unit}`;
         },
       },
     },
@@ -76,13 +79,16 @@ const MyChart = ({ temp, categories }) => {
     },
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="chart-container">
       <Chart
         options={settings}
         series={[{ name: 'Temperature', type: 'line', data: temp }]}
         width={width * 0.95}
-        height={height * 0.7}
+        height={height * 0.65}
       />
     </div>
   );
@@ -91,6 +97,7 @@ const MyChart = ({ temp, categories }) => {
 MyChart.propTypes = {
   temp: PropTypes.arrayOf(PropTypes.string).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 

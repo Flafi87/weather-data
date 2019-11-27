@@ -1,5 +1,6 @@
 {
-  "extends": ["airbnb"],
+  "plugins": ["react-redux"],
+  "extends": ["airbnb", "plugin:react-redux/recommended"],
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off",
