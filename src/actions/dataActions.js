@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  DOWNLOAD_DATA, DATA_LOADING, CHANGE_GRAPH, CHART_LOADING,
+  DOWNLOAD_DATA, DATA_LOADING, CHANGE_GRAPH, CHART_LOADING, CHANGE_RESULTS,
 } from './types';
 
 
@@ -11,8 +11,12 @@ export const setChartLoading = () => ({
   type: CHART_LOADING,
 });
 
-export const getData = () => (dispatch) => {
-  const url = 'https://api.thingspeak.com/channels/71542/feeds.json?results=3000';
+export const changeResults = (results) => ({ type: CHANGE_RESULTS, payload: results });
+
+export const getData = () => (dispatch, getState) => {
+  const state = getState();
+  const { results } = state.data;
+  const url = `https://api.thingspeak.com/channels/71542/feeds.json?results=${results}`;
   dispatch(setDataLoading());
   fetch(url, {
     method: 'GET',

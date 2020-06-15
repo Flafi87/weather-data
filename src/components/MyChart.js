@@ -14,7 +14,21 @@ const MyChart = ({
   // eslint-disable-next-line no-undef
   const height = window.innerHeight;
   const settings = {
+    forceNiceScale: true,
     chart: {
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 1000,
+        animateGradually: {
+          enabled: true,
+          delay: 150,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 350,
+        },
+      },
       foreColor: '#CCFFFF',
       toolbar: {
         show: false,
@@ -43,7 +57,7 @@ const MyChart = ({
           cssClass: 'apexcharts-yaxis-label',
         },
         formatter: function (value) {
-          return `${value} ${unit}`;
+          return `${parseFloat(value).toFixed(1)} ${unit}`;
         },
       },
     },
@@ -88,7 +102,7 @@ const MyChart = ({
         options={settings}
         series={[{ name: 'Temperature', type: 'line', data: temp }]}
         width={width * 0.95}
-        height={height * 0.65}
+        height={height * 0.62}
       />
     </div>
   );
