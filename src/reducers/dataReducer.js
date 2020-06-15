@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import {
-  DOWNLOAD_DATA, CHANGE_GRAPH, DATA_LOADING, CHART_LOADING,
+  DOWNLOAD_DATA, CHANGE_GRAPH, DATA_LOADING, CHART_LOADING, CHANGE_RESULTS,
 } from '../actions/types';
 
 
@@ -18,6 +18,7 @@ const initialState = {
   loading: true,
   chartLoading: true,
   unit: 'C°',
+  results: 200,
 };
 
 export default function (state = initialState, action) {
@@ -54,6 +55,12 @@ export default function (state = initialState, action) {
         temp: action.payload.temp,
         chartLoading: false,
         unit: action.payload.unit,
+      };
+    case CHANGE_RESULTS:
+      return {
+        ...state,
+        loading: true,
+        results: action.payload,
       };
     default:
       return state;

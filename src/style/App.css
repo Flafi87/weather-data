@@ -1,11 +1,9 @@
 html {
   height: 100%;
-  background-color: #253240;
-  cursor:default;
+  cursor: default;
 }
 .App {
   text-align: center;
-  background-color: #253240;
   height: 100%;
 }
 
@@ -59,7 +57,7 @@ header {
 }
 .data.active {
   max-width: 150px;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
   color: white;
   background-color: #314052;
@@ -67,12 +65,16 @@ header {
   justify-content: center;
   text-align: center;
   font-size: calc(4px + 2vmin);
-  cursor:pointer;
+  cursor: pointer;
   transition: 0.3s;
 }
-.data.active:hover{
-  color: #CCFFCC;
-  background-color: #148ECC
+.data.active:hover {
+  color: #ccffcc;
+  background-color: #148ecc;
+}
+.data.time {
+  background-color: #148ecc;
+  opacity: 0.9;
 }
 .row {
   justify-content: center;
@@ -83,10 +85,14 @@ header {
   align-items: center;
 }
 
-.helper{
-  margin:5px;
-  font-size:0.6rem;
-  color:white
+.helper {
+  margin: 5px;
+  font-size: 0.6rem;
+  color: white;
+}
+.slider {
+  display: flex;
+  flex-direction: column;
 }
 
 /**Spinner */

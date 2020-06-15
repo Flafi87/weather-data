@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 import WeatherData from './WeatherData';
 import '../style/App.css';
 import Spinner from './Spinner';
-import { getData, changeGraph } from '../actions/dataActions';
+import { getData, changeGraph, changeResults } from '../actions/dataActions';
 
 
-function App(props) {
-  const {
-    // eslint-disable-next-line no-shadow
-    isLoading, chartLoading, lastData, categories, temp, changeGraph, unit, getData,
-  } = props;
+const App = ({
+  isLoading, chartLoading, lastData, categories, temp, changeGraph, unit, results, getData,
+  changeResults,
+}) => {
+  /**
+   * Downloading Data
+   */
+
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, [getData, results]);
   if (isLoading) {
     return (
       <div className="App">
@@ -36,10 +39,12 @@ function App(props) {
         changeGraph={changeGraph}
         chartLoading={chartLoading}
         unit={unit}
+        changeResults={changeResults}
+        results={results}
       />
     </div>
   );
-}
+};
 const mapStateToProps = (state) => ({
   lastData: state.data.lastData,
   categories: state.data.categories,
@@ -47,6 +52,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.data.loading,
   chartLoading: state.data.chartLoading,
   unit: state.data.unit,
+  results: state.data.results,
 });
 
 App.propTypes = {
@@ -58,9 +64,11 @@ App.propTypes = {
   temp: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeGraph: PropTypes.func.isRequired,
   chartLoading: PropTypes.bool.isRequired,
+  results: PropTypes.number.isRequired,
+  changeResults: PropTypes.func.isRequired,
 };
 
 export default connect(
   mapStateToProps,
-  { getData, changeGraph },
+  { getData, changeGraph, changeResults },
 )(App);
