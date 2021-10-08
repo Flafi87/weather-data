@@ -1,10 +1,12 @@
+/* eslint-disable import/no-anonymous-default-export */
 /* eslint-disable no-undef */
 import {
-  DOWNLOAD_DATA, CHANGE_GRAPH, DATA_LOADING, CHART_LOADING, CHANGE_RESULTS,
+  DOWNLOAD_DATA, CHANGE_GRAPH, DATA_LOADING, CHART_LOADING, CHANGE_RESULTS, CHANGE_CITY
 } from '../actions/types';
 
-
 const initialState = {
+  thingspeakID: '71542',
+  cityName: 'Kiskunmajsa',
   data: [],
   graphData: [],
   categories: [],
@@ -36,7 +38,10 @@ export default function (state = initialState, action) {
     case DOWNLOAD_DATA:
       return {
         ...state,
+        lastMeasuredData:action.payload.lastMeasuredData,
+        measuredData:action.payload.measuredData,
         data: action.payload,
+        channel:action.payload.channel,
         loading: false,
         chartLoading: false,
         lastData: action.payload.lastData,
@@ -62,6 +67,12 @@ export default function (state = initialState, action) {
         loading: true,
         results: action.payload,
       };
+    case CHANGE_CITY:
+      return {
+        ...state,
+        thingspeakID: action.payload.thingspeakID,
+        cityName: action.payload.cityName
+      }
     default:
       return state;
   }

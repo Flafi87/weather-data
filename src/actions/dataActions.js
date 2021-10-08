@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 import {
-  DOWNLOAD_DATA, DATA_LOADING, CHANGE_GRAPH, CHART_LOADING, CHANGE_RESULTS,
+  DOWNLOAD_DATA, DATA_LOADING, CHANGE_GRAPH, CHART_LOADING, CHANGE_RESULTS,CHANGE_CITY
 } from './types';
-
 
 export const setDataLoading = () => ({
   type: DATA_LOADING,
@@ -15,26 +14,27 @@ export const changeResults = (results) => ({ type: CHANGE_RESULTS, payload: resu
 
 export const getData = () => (dispatch, getState) => {
   const state = getState();
-  const { results } = state.data;
-  const url = `https://api.thingspeak.com/channels/71542/feeds.json?results=${results}`;
+  const { results, thingspeakID } = state.data;
+  const url = `https://flafi.hu/weather?count=${results}&id=${thingspeakID}`;
   dispatch(setDataLoading());
-  fetch(url, {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-    referrer: 'no-referrer',
-  })
+  fetch(url)
     .then((response) => response.json())
     .then((json) => dispatch({
       type: DOWNLOAD_DATA,
-      payload: json.feeds,
+      payload: json,
     }));
 };
+
+export const changeCity = (thingspeakID,cityName) => (dispatch) => {
+  dispatch({
+    type: CHANGE_CITY,
+    payload: {
+      thingspeakID,
+      cityName
+    },
+  });
+  dispatch(getData());
+}
 
 export const changeGraph = (type) => (dispatch) => {
   dispatch(setChartLoading());
