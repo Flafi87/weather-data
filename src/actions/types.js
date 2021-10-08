@@ -3,3 +3,4 @@ export const CHANGE_GRAPH = 'CHANGE_GRAPH';
 export const CHANGE_RESULTS = 'CHANGE_RESULTS';
 export const DATA_LOADING = 'DATA_LOADING';
 export const CHART_LOADING = 'CHART_LOADING';
+export const CHANGE_CITY = 'CHANGE_CITY';

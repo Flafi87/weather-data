@@ -6,15 +6,13 @@ import '../style/App.css';
 import Spinner from './Spinner';
 import { getData, changeGraph, changeResults } from '../actions/dataActions';
 
-
 const App = ({
-  isLoading, chartLoading, lastData, categories, temp, changeGraph, unit, results, getData,
+  cityName,isLoading, chartLoading, lastData,lastMeasuredData, categories, temp, changeGraph, unit, results, getData,
   changeResults,
 }) => {
   /**
    * Downloading Data
    */
-
   useEffect(() => {
     getData();
   }, [getData, results]);
@@ -31,9 +29,10 @@ const App = ({
   }
   return (
     <div className="App">
-      <header>Kiskunmajsa Weather</header>
+      <header>{cityName} Weather</header>
       <WeatherData
         lastData={lastData}
+        lastMeasuredData={lastMeasuredData}
         categories={categories}
         temp={temp}
         changeGraph={changeGraph}
@@ -46,7 +45,9 @@ const App = ({
   );
 };
 const mapStateToProps = (state) => ({
+  cityName: state.data.cityName,
   lastData: state.data.lastData,
+  lastMeasuredData: state.data.lastMeasuredData,
   categories: state.data.categories,
   temp: state.data.temp,
   isLoading: state.data.loading,

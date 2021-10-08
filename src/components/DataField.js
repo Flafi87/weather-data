@@ -15,21 +15,26 @@ const DataField = ({
       onClick();
     }
   };
-  return (
-    <div className={`data ${additionalClass}`} onClick={onClick} role="button" tabIndex={0} onKeyPress={handleKeyPress}>
-      <div>{text}</div>
-      <div>
-        {data}
-        {unit}
+  if(data){
+    return (
+      <div className={`data ${additionalClass}`} onClick={onClick} role="button" tabIndex={0} onKeyPress={handleKeyPress}>
+        <div>{text}</div>
+        <div>
+          {data}
+          {unit}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }else{
+    return <></>
+  }
+
 };
 
 DataField.defaultProps = { additionalClass: 'active', onClick: null, unit: '' };
 DataField.propTypes = {
   onClick: PropTypes.func,
-  data: PropTypes.string.isRequired,
+  data: PropTypes.string,
   additionalClass: PropTypes.string,
   text: PropTypes.string.isRequired,
   unit: PropTypes.string,
